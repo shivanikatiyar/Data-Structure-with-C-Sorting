@@ -1,0 +1,377 @@
+                   Assignment-4(DS) Sorting
+                *******************************
+1.Selection Sorting: 
+      
+[Selection Sorting Algorithm]
+
+Algorithm Selection(A,N):This algorithm sorts the array A with N elements.
+1. [Loop]
+    Repeat Steps 2 and 3 for K=0,1,2,3,4,5,.......N-2:
+2.Call Loc=min(A,K,N)
+3.[Interchange A[K],A[K]=A[Loc].]
+        Set TEMP=A[K],A[K]=A[Loc] and
+        A[Loc]=TEMP.
+  [End of Step 1 Loop]
+4.Exit.
+
+[Selection Sorting Program Code]
+
+#include<stdio.h>
+int min(int A[],int k,int n)
+{
+    int j,Loc,min;
+    min=A[k];
+    Loc=k;
+    for(j=k+1;j<=n-1;j++)
+    {
+
+        if(min>A[j])
+        {
+            min=A[j];
+            Loc=j;
+        }
+    }
+    return (Loc);
+}
+int main()
+{
+     int A[50],n,k,Loc,temp;
+    printf("\nEnter Array size:");
+    scanf("%d",&n);
+    printf("\nEnter Array element:");
+    for(k=0;k<n;k++)
+    {
+        scanf("%d",&A[k]);
+    }
+    for(k=0;k<=n-2;k++)
+    {
+        Loc=min(A,k,n);
+        temp=A[k];
+        A[k]=A[Loc];
+        A[Loc]=temp;
+    }
+    printf("\nPrint the sorted Array:");
+    for(k=0;k<=n-1;k++)
+    {
+        printf("\t%d",A[k]);
+    }
+}
+Input-
+Enter Array size:5
+Enter Array element:12 3 45 4 45
+Output-
+Print the sorted Array: 3       4       12      45      45
+
+Time Complexity-O(n2)
+
+2.Bubble Sorting: 
+[Bubble Sorting Algorithm]
+
+Bubble_sort(A,N):A is array of values and N is the number of elements
+1. Repeat step 2,3,4 for round =1,2,3,4,.....N-1
+2. flag=0
+3.Repeat for i=0,1,2,3,4,5,.......N-1-round
+                    If A[i]>A[i+1] then swap A[i] and A[i+1],
+also set flag=1
+4. If flag == 0 return
+5. Return
+
+ [Bubble Sorting Program Code]  
+             
+#include<stdio.h>
+void Bubble_sort(int A[],int n)
+{
+  int round,i,temp,flag;
+  for(round=1;round<=n-1;round++)
+  {
+      flag=0;
+      for(i=0;i<=n-1-round;i++)
+      {
+          if(A[i]>A[i+1])
+          {
+              flag=1;
+              temp=A[i];
+              A[i]=A[i+1];
+              A[i+1]=temp;
+          }
+      }
+      if(flag==0)
+        return;
+  }
+  }
+  int main()
+  {
+
+      int A[50],n,i;
+      printf("\nEnter the Array size:");
+      scanf("%d",&n);
+      printf("\nEnter the array element:");
+      for(i=0;i<=n-1;i++)
+      {
+          scanf("%d",&A[i]);
+      }
+      Bubble_sort(A,n);
+    printf("Print the Sorted Array:");
+      for(i=0;i<=n-1;i++)
+        printf("\t%d",A[i]);
+  }
+INPUT-
+Enter the Array size:6
+Enter the array element:12 11 34 56 36 45
+OUTPUT-
+Print the Sorted Array: 11      12      34      36      45      56
+
+Time complexity-> Best-case:O(n) and worst- case:O(n2)
+
+3.Insertion Sorting:  
+     
+[Insertion Sorting Algorithm]
+
+Ins_Sort(A,N):A is an Array with N elements.
+1. i=1
+2. Repeat steps 3 to 5 while i<N
+3. temp=A[i],j=i-1
+4. Repeat while j>=0 and temp<A[j]
+     A[j+1]=A[j] and j=j-1
+5. A[j+1]=temp,i=i+1
+6. Exit
+
+ [Insertion Sorting Program Code]  
+
+#include<stdio.h>
+void Inser_sort(int A[],int n)
+{
+    int  i,j,temp;
+    for(i=1;i<n;i++)
+    {
+        temp=A[i];
+        for(j=i-1;j>=0&&temp<A[j];j--)
+          A[j+1]=A[j];
+          A[j+1]=temp;
+    }
+}
+int main()
+  {
+      int A[50],n,i;
+      printf("\nEnter the Array size:");
+      scanf("%d",&n);
+      printf("\nEnter the array element:");
+      for(i=0;i<=n-1;i++)
+      {
+          scanf("%d",&A[i]);
+      }
+       Inser_sort(A,n);
+       printf("Print the Sorted Array:");
+       for(i=0;i<=n-1;i++)
+       printf("\t%d",A[i]);
+  }
+ INPUT-
+Enter the Array size:5
+Enter the array element:12 11 34 56 67
+OUTPUT-
+Print the Sorted Array: 11      12      34      56      67
+
+Time Complexity-O(n2)
+
+4.Merge Sorting: 
+
+[Merge Sorting Algorithm]
+
+MergeSort(A,L,,R) where L is the index of the first element & R is the index of the last element.
+If R>L
+1. Find the middle index of the array to divide it in two halves:
+m=(L+R)/2
+2.  Call MergeSort for first half:
+mergeSort(A,L,m)
+3. Call mergeSort for second half:
+mergeSort(A,m+1,R)
+4. Recursively,merge the two halves in a sorted manner,so that only one sorted array is left:
+merge(A,L,m,R)
+
+[Merge Sorting Program Code]  
+
+#include<stdio.h>
+void merge(int A[],int n1,int index1,int B[],int n2,int index2,int C[],int index)
+{
+    while(n1&&n2)
+    {
+     if(A[index1]<B[index2]){
+        C[index]=A[index1];
+        index++;
+        index1++;
+        n1--;
+     }
+     else{
+        C[index]=B[index2];
+        index++;
+        index2++;
+        n2--;
+     }
+    }
+  while(n1){
+    C[index]=A[index1];
+    index++;
+    index1++;
+    n1--;
+       }
+  while(n2){
+    C[index]=B[index2];
+    index++;
+    index2++;
+    n2--;
+      }
+}
+void mergepass(int A[],int N,int L,int B[])
+{
+    int j,LB;
+    int Q,S,R;
+    Q=N/(2*L);
+    S=2*L*Q;
+    R=N-S;
+    for(j=0;j<Q;j++){
+        LB=(2*j)*L;
+        merge(A,L,LB,A,L,LB+L,B,LB);
+    }
+    if(R<=L){
+        for(j=0;j<R;j++)
+            B[S+j]=A[S+j];
+    }
+    else{
+        merge(A,L,S,A,R-L,S+L,B,S);
+    }
+}
+void merge_sort(int A[],int N)
+{
+    int L=1,B[11];
+    while(L<N){
+        mergepass(A,N,L,B);
+        mergepass(B,N,2*L,A);
+        L=4*L;
+    }
+}
+int main()
+  {
+
+      int A[50],n,i;
+      printf("\nEnter the Array size:");
+      scanf("%d",&n);
+      printf("\nEnter the array element:");
+      for(i=0;i<=n-1;i++)
+      {
+          scanf("%d",&A[i]);
+      }
+      merge_sort(A,n);
+    printf("Print the Sorted Array:");
+      for(i=0;i<=n-1;i++)
+        printf("\t%d",A[i]);
+  }
+ INPUT-
+Enter the Array size:8
+Enter the array element:12 11 10 13 9 45 33 67
+OUTPUT-
+Print the Sorted Array: 9       10      11      12      13      33      45      67
+
+Time Complexity-O{n*log(n)}
+
+5.Quick Sorting:
+ 
+[Quick Sorting Algorithm]
+
+Algorithm QUICKSORT: This algorithm sorts an array A with N elements
+1. TOP= -1
+2. If N>1 then TOP=TOP+1,LOWER[TOP]=0,UPPER[TOP]=N-1
+3. Repeat Step 4 to 7 while TOP!= -1
+4. POP sublist from stack Set BEG=LOWER[TOP],
+         END=UPPER[TOP],TOP=TOP-1.
+5. Call QUICK(A,N,BEG,END,LOC)
+6. Push left sublist onto the stack
+ If (BEG<LOC-1),Then:TOP=TOP+1,
+LOWER[TOP]=BEG,UPPER[TOP]=LOC-1
+7. Push Right sublist onto stacks
+ If (LOC+1<END),Then:TOP=TOP+1,
+LOWER[TOP]=LOC+1,UPPER[TOP]=END
+8. Exit
+
+[Quick Sorting Program Code]  
+
+#include<stdio.h>
+void quick(int a[],int n,int beg,int end,int *locptr)
+{
+    int left,right,temp;
+    left=beg; right=end;
+        *locptr=beg;
+step2:
+    while(a[*locptr]<=a[right]&&*locptr!=right)
+         right--;
+    if(*locptr==right)
+        return;
+    if(a[*locptr]>a[right]){
+        temp=a[*locptr];
+        a[*locptr]=a[right];
+        a[right]=temp;
+        *locptr=right;
+    }
+    goto step3;
+    step3:
+       while(a[left]<=a[*locptr]&&left!=*locptr)
+            left++;
+        if(*locptr==left)
+            return;
+        if(a[left]>a[*locptr]){
+            temp=a[left];
+            a[left]=a[*locptr];
+            a[*locptr]=temp;
+            *locptr=left;
+
+     }
+     goto step2;
+}
+void quick_sort(int a[],int n)
+{
+    int beg,end,top=-1,loc;
+    int lower[10],upper[10];
+    if(n>1){
+        top++;
+        lower[top]=0;
+        upper[top]=n-1;
+        }
+      while(top!=-1){
+        beg=lower[top];
+        end=upper[top];
+        top--;
+       quick(a,n,beg,end,&loc);
+        if(beg<loc-1){
+            top++;
+            lower[top]=beg;
+            upper[top]=loc-1;
+        }
+        if(loc+1<end){
+            top++;
+            lower[top]=loc+1;
+            upper[top]=end;
+        }
+    }
+}
+int main()
+  {
+      int A[50],i,n;
+      printf("\nEnter the Array size:");
+      scanf("%d",&n);
+      printf("\nEnter the array element:");
+      for(i=0;i<=n-1;i++)
+      {
+          scanf("%d",&A[i]);
+      }
+      printf("Print the Sorted Array:");
+       quick_sort(A,n);
+      for(i=0;i<n;i++){
+        printf("\t%d",A[i]);
+        }
+  }
+INPUT-
+Enter the Array size:5
+Enter the array element:12 11 23 22 45
+OUTPUT-
+Print the Sorted Array: 11      12      22      23      45
+
+Time Complexity-O{n*log(n)}
